@@ -1,0 +1,9 @@
+@media (max-width:780px) {
+    .headline {
+        flex-direction: column;
+    }
+
+    .pokeball {
+        display: none;
+    }
+}
