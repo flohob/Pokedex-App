@@ -3,7 +3,7 @@
         flex-direction: column;
     }
 
-    .pokeball {
-        display: none;
+    .headline {
+        gap:20px;
     }
 }

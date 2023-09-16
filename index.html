@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+    <script src="chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="mobile.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,16 +19,7 @@
 
     <div class="card">
         <div class="tools">
-          <div class="circle">
-            <span class="red box"></span>
-          </div>
-          <div class="circle">
-            <span class="yellow box"></span>
-          </div>
-          <div class="circle">
-            <span class="green box"></span>
-          </div>
-        </div>
+          
         <div class="card__content">
         
     
@@ -68,12 +61,17 @@
             </button>
         </div>
         </div>
+        </div>
     </div>
 
     <div class="pokemon" id="pokemon">
     </div>
 
     <div id="containerpoke" class="containerpoke d-none"></div>
+
+    <button class="loadbtn" id="loadbtn" onclick="addLoad()">more Pokemon</button>
+
+    
 
 </div>
 </div>

@@ -1,13 +1,27 @@
 let loadedPokemon = [];
-currentPokemonIndex = 0;
+let pokestats = [];
+let statsname = ['hp', 'attack', 'defense', 'special-attack', 'special-defense', 'speed'];
+let currentPokemonIndex = 0; // Startpunkt für das Laden der Pokémon
+let loadStop = 20; // Anzahl der Pokémon, die pro Laden geladen werden sollen
 
 async function loadPokemon() {
-    for (let i = 1; i <= 20; i++) {
+    // Berechne den Start- und Endpunkt basierend auf loadStop
+    const startIndex = currentPokemonIndex + 1;
+    const endIndex = currentPokemonIndex + loadStop;
+
+    for (let i = startIndex; i <= endIndex; i++) {
         let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
         let response = await fetch(url);
         let currentPokemon = await response.json();
-        loadedPokemon.push(currentPokemon);}
-    renderPokeInfo();}
+        loadedPokemon.push(currentPokemon);
+        const stats = currentPokemon.stats.map(stat => stat.base_stat);
+        pokestats.push(stats);
+    }
+    renderPokeInfo();
+    console.log(loadedPokemon);
+    console.log(pokestats);
+}
+
 
 function setBackgroundColor(typeName) {
     switch (typeName) {
@@ -56,7 +70,8 @@ function renderPokemonCard(poke, bgColor) {
         <h1>#${poke.id} ${poke.name}</h1>
         <img class="PokePic" src="${poke.sprites.front_default}">
         <h2>${poke.types[0].type.name}</h2>
-    </div>`;
+    </div>
+    `;
 }
 
 function showContainer(pokemonId) {
@@ -81,6 +96,13 @@ function showContainer(pokemonId) {
         containerpoke.classList.add('d-none');
 
         currentPokemonIndex = loadedPokemon.findIndex(pokemon => pokemon.id === pokemonId);
+
+        renderChart(pokemonId);
+        shownoButton();
+
+
+        
+        
     }
 }
 
@@ -101,7 +123,9 @@ function renderPokemonDetails(pokemon, bgColor) {
         <p>Height: ${pokemon.height} decimetres</p>
         <p>Weight: ${pokemon.weight} hectograms</p>
         <p>Abilities: ${pokemon.abilities.map(ability => ability.ability.name).join(', ')}</p>
-        <p>Stats: ${pokemon.stats[0].base_stat}</p>
+        <div>
+  <canvas id="myChart"></canvas>
+</div>
     </div>`;
 }
 
@@ -110,6 +134,8 @@ function closebtn() {
    containerpokeinfo.classList.add('d-none')
    let containerpoke = document.getElementById('pokemon');
    containerpoke.classList.remove('d-none');
+   let btn = document.getElementById('loadbtn');
+   btn.classList.remove('d-none');
 }
 
 function showNextPokemon() {
@@ -125,3 +151,14 @@ function showPreviousPokemon() {
         showContainer(loadedPokemon[currentPokemonIndex].id);
     }
 }
+
+function addLoad() {
+    currentPokemonIndex += loadStop; // Erhöhe den Startpunkt für das Laden der neuen Pokémon
+    loadPokemon(); // Lade die nächsten 20 Pokémon
+}
+
+function shownoButton() {
+   let button =  document.getElementById('loadbtn');
+   button.classList.add('d-none');
+}
+
