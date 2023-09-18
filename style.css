@@ -33,7 +33,7 @@ body {
 .pokemoncard:hover {
     transform: scale(1.05);
     transition:cubic-bezier(0.075, 0.82, 0.165, 1);
-    transition-delay: 250ms;
+    transition-delay: 10ms;
     opacity: 1;
     background-position-x: center;
     transition: ease-in-out(7s)
@@ -110,7 +110,10 @@ body {
   .card {
     
     margin: 0 auto;
-    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     border-radius: 8px;
     z-index: 1;
    }
@@ -174,13 +177,14 @@ body {
    }
 
    .containerpoke {
-    width: 340px;
+    width: 500px;
     border-radius: 50px;
     overflow: hidden;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.7);
     display: block;
     text-align: center;
     margin-top: 90px;
+    height: 100vh;
 }
    
    
@@ -258,7 +262,53 @@ body {
   font-size: 1em;
   height: 50px;
   padding: 0 25px;
-  transition: all 200ms;}
+  transition: all 200ms;
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0px;
+}
+
+ .loadpokebtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ }
+
+  .pokemenucon {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 30px;
+  }
   
+ .nextPokebtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  height: 40px;
+  margin: 72px 0px;
+  cursor: pointer;
+ }
+
+ .stats {
+  cursor: pointer;
+ }
+
+ .info {
+  cursor: pointer;
+ }
+
+ .stats:hover {
+  transform: scale(1.225);
+  border-bottom: 2px solid black;
   
+ }
+
+ .info:hover {
+  transform: scale(1.225);
+  text-decoration: dotted;
+  border-bottom: 2px solid black;
   
+ }

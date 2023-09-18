@@ -46,6 +46,7 @@ function renderPokeInfo() {
         const typeName = poke.types[0].type.name;
         const bgColor = setBackgroundColor(typeName);
         pokemonContainer.innerHTML += renderPokemonCard(poke, bgColor);
+        console.log(loadedPokemon);
     });}
 
 
@@ -68,7 +69,7 @@ function renderPokemonCard(poke, bgColor) {
     return `
     <div onclick="showContainer(${poke.id})" class="pokemoncard" id="${poke.id}" data-id="${poke.id}" style="background-color: ${bgColor};">
         <h1>#${poke.id} ${poke.name}</h1>
-        <img class="PokePic" src="${poke.sprites.front_default}">
+        <img class="PokePic" src="${poke.sprites.other.home.front_default}">
         <h2>${poke.types[0].type.name}</h2>
     </div>
     `;
@@ -116,17 +117,26 @@ function renderPokemonDetails(pokemon, bgColor) {
         <label class="close"></label>
         </div>
         <h1>${pokemon.id}. ${pokemon.name}</h1>
-        <button onclick="showPreviousPokemon()"><</button>
-        <img class="PokePic" src="${pokemon.sprites.front_default}">
-        <button onclick="showNextPokemon()">></button>
-        <h2>${pokemon.types[0].type.name}</h2>
+        <div class="nextPokebtn">
+        <img src="pre.png" class="nextPokebtn" onclick="showPreviousPokemon()"></button>
+        <img class="PokePic" src="${pokemon.sprites.other.home.front_default}">
+        <img src="next.png" class="nextPokebtn" onclick="showNextPokemon()"></button>
+        </div>
+        <div class="pokemenucon">
+        <h2 class="stats" onclick="showStats()">Stats</h2>
+        <h2 class="info" onclick="showInfo()">Info</h2>
+        </div>
+        <div id="pokeinfoCon">
+        <p>Type: ${pokemon.types[0].type.name}</p>
         <p>Height: ${pokemon.height} decimetres</p>
         <p>Weight: ${pokemon.weight} hectograms</p>
         <p>Abilities: ${pokemon.abilities.map(ability => ability.ability.name).join(', ')}</p>
-        <div>
+        </div>
+        <div id="pokeChart" class="d-none">
   <canvas id="myChart"></canvas>
 </div>
-    </div>`;
+    </div>`
+    
 }
 
 function closebtn() {
@@ -162,3 +172,18 @@ function shownoButton() {
    button.classList.add('d-none');
 }
 
+function showStats() {
+    let stats = document.getElementById('pokeinfoCon');
+    let chat = document.getElementById('pokeChart');
+
+    stats.classList.add('d-none');
+    chat.classList.remove('d-none');
+}
+
+function showInfo() {
+    let stats = document.getElementById('pokeinfoCon');
+    let chat = document.getElementById('pokeChart');
+
+    stats.classList.remove('d-none');
+    chat.classList.add('d-none');
+}
