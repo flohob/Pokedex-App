@@ -1,11 +1,10 @@
 let loadedPokemon = [];
 let pokestats = [];
 let statsname = ['hp', 'attack', 'defense', 'special-attack', 'special-defense', 'speed'];
-let currentPokemonIndex = 0; // Startpunkt für das Laden der Pokémon
-let loadStop = 20; // Anzahl der Pokémon, die pro Laden geladen werden sollen
+let currentPokemonIndex = 0; 
+let loadStop = 20; 
 
 async function loadPokemon() {
-    // Berechne den Start- und Endpunkt basierend auf loadStop
     const startIndex = currentPokemonIndex + 1;
     const endIndex = currentPokemonIndex + loadStop;
 
@@ -18,8 +17,6 @@ async function loadPokemon() {
         pokestats.push(stats);
     }
     renderPokeInfo();
-    console.log(loadedPokemon);
-    console.log(pokestats);
 }
 
 
@@ -46,7 +43,6 @@ function renderPokeInfo() {
         const typeName = poke.types[0].type.name;
         const bgColor = setBackgroundColor(typeName);
         pokemonContainer.innerHTML += renderPokemonCard(poke, bgColor);
-        console.log(loadedPokemon);
     });}
 
 
@@ -65,78 +61,25 @@ function searchPokemon() {
 }
 
 
-function renderPokemonCard(poke, bgColor) {
-    return `
-    <div onclick="showContainer(${poke.id})" class="pokemoncard" id="${poke.id}" data-id="${poke.id}" style="background-color: ${bgColor};">
-        <h1>#${poke.id} ${poke.name}</h1>
-        <img class="PokePic" src="${poke.sprites.other.home.front_default}">
-        <h2>${poke.types[0].type.name}</h2>
-    </div>
-    `;
-}
-
 function showContainer(pokemonId) {
-    // Finde das ausgewählte Pokemon anhand seiner ID in loadedPokemon
     const selectedPokemon = loadedPokemon.find(pokemon => pokemon.id === pokemonId);
 
-    if (selectedPokemon) {
-        // Zeige die ausgewählten Pokemon-Informationen im Container an
-        const containerpokeinfo = document.getElementById("containerpoke");
-        containerpokeinfo.classList.remove('d-none');
-        
-        // Rufe die Hintergrundfarbe für den ausgewählten Pokémon-Typ auf
-        const typeName = selectedPokemon.types[0].type.name;
-        const bgColor = setBackgroundColor(typeName);
+    if (!selectedPokemon) return;
 
-        // Setze die Hintergrundfarbe im CSS-Stil
-        containerpokeinfo.style.backgroundColor = bgColor;
+    const containerpokeinfo = document.getElementById("containerpoke");
+    const typeName = selectedPokemon.types[0].type.name;
+    const bgColor = setBackgroundColor(typeName);
 
-        containerpokeinfo.innerHTML = renderPokemonDetails(selectedPokemon);
-        
-        const containerpoke = document.getElementById('pokemon');
-        containerpoke.classList.add('d-none');
+    containerpokeinfo.classList.remove('d-none');
+    containerpokeinfo.style.backgroundColor = bgColor;
+    containerpokeinfo.innerHTML = renderPokemonDetails(selectedPokemon);
 
-        currentPokemonIndex = loadedPokemon.findIndex(pokemon => pokemon.id === pokemonId);
+    document.getElementById('pokemon').classList.add('d-none');
 
-        renderChart(pokemonId);
-        shownoButton();
+    currentPokemonIndex = loadedPokemon.findIndex(pokemon => pokemon.id === pokemonId);
 
-
-        
-        
-    }
-}
-
-function renderPokemonDetails(pokemon, bgColor) {
-    // Die Hintergrundfarbe wird nun im showContainer gesetzt, nicht mehr hier.
-    return `
-    <div>
-        <div class="close-container" onclick="closebtn()" style="background-color: ${bgColor};">
-        <div class="leftright"></div>
-        <div class="rightleft"></div>
-        <label class="close"></label>
-        </div>
-        <h1>${pokemon.id}. ${pokemon.name}</h1>
-        <div class="nextPokebtn">
-        <img src="pre.png" class="nextPokebtn" onclick="showPreviousPokemon()"></button>
-        <img class="PokePic" src="${pokemon.sprites.other.home.front_default}">
-        <img src="next.png" class="nextPokebtn" onclick="showNextPokemon()"></button>
-        </div>
-        <div class="pokemenucon">
-        <h2 class="stats" onclick="showStats()">Stats</h2>
-        <h2 class="info" onclick="showInfo()">Info</h2>
-        </div>
-        <div id="pokeinfoCon">
-        <p>Type: ${pokemon.types[0].type.name}</p>
-        <p>Height: ${pokemon.height} decimetres</p>
-        <p>Weight: ${pokemon.weight} hectograms</p>
-        <p>Abilities: ${pokemon.abilities.map(ability => ability.ability.name).join(', ')}</p>
-        </div>
-        <div id="pokeChart" class="d-none">
-  <canvas id="myChart"></canvas>
-</div>
-    </div>`
-    
+    renderChart(pokemonId);
+    shownoButton();
 }
 
 function closebtn() {
@@ -163,8 +106,8 @@ function showPreviousPokemon() {
 }
 
 function addLoad() {
-    currentPokemonIndex += loadStop; // Erhöhe den Startpunkt für das Laden der neuen Pokémon
-    loadPokemon(); // Lade die nächsten 20 Pokémon
+    currentPokemonIndex += loadStop; 
+    loadPokemon(); // 
 }
 
 function shownoButton() {

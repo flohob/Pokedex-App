@@ -10,6 +10,16 @@ body {
         font-weight: bolder;
 }
 
+h2 {
+  font-weight: 900;
+  font-size: 28px;
+}
+
+p {
+  font-size: 20px;
+  font-weight: 900;
+}
+
 .pokemoncard {
     background-color: lightgray;
     padding: 8px;
@@ -184,7 +194,7 @@ body {
     display: block;
     text-align: center;
     margin-top: 90px;
-    height: 100vh;
+    height: 75vh;
 }
    
    
