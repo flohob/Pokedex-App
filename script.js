@@ -1,8 +1,8 @@
 let loadedPokemon = [];
 let pokestats = [];
 let statsname = ['hp', 'attack', 'defense', 'special-attack', 'special-defense', 'speed'];
-let currentPokemonIndex = 0; 
-let loadStop = 20; 
+let currentPokemonIndex = 0;
+let loadStop = 20;
 
 async function loadPokemon() {
     const startIndex = currentPokemonIndex + 1;
@@ -18,6 +18,8 @@ async function loadPokemon() {
     }
     renderPokeInfo();
 }
+
+console.log(loadedPokemon);
 
 
 function setBackgroundColor(typeName) {
@@ -76,7 +78,7 @@ function showContainer(pokemonId) {
 
     document.getElementById('pokemon').classList.add('d-none');
 
-    currentPokemonIndex = loadedPokemon.findIndex(pokemon => pokemon.id === pokemonId);
+    currentPokemonIndex = selectedPokemon;
 
     renderChart(pokemonId);
     shownoButton();
@@ -84,7 +86,7 @@ function showContainer(pokemonId) {
 
 function closebtn() {
     let containerpokeinfo =  document.getElementById("containerpoke");
-   containerpokeinfo.classList.add('d-none')
+   containerpokeinfo.classList.add('d-none');
    let containerpoke = document.getElementById('pokemon');
    containerpoke.classList.remove('d-none');
    let btn = document.getElementById('loadbtn');
@@ -107,7 +109,7 @@ function showPreviousPokemon() {
 
 function addLoad() {
     currentPokemonIndex += loadStop; 
-    loadPokemon(); // 
+    loadPokemon();
 }
 
 function shownoButton() {

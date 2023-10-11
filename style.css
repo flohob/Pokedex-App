@@ -195,6 +195,11 @@ p {
     text-align: center;
     margin-top: 90px;
     height: 75vh;
+    
+}
+
+.opacity {
+  opacity:0.5 ;
 }
    
    

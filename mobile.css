@@ -11,7 +11,7 @@
 
 @media (max-width:550px) {
     .containerpoke {
-        height: 69vh;
+        height: 100vh;
         width: 320px;
     }
 }
