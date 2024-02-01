@@ -28,7 +28,6 @@ p {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: url(/pokeball-1594373_640.png)  ;
     opacity: 0.84;
     margin: 8px;
 }
@@ -195,6 +194,7 @@ p {
     text-align: center;
     margin-top: 90px;
     height: 75vh;
+    
     
 }
 

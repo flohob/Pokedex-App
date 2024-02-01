@@ -19,8 +19,6 @@ async function loadPokemon() {
     renderPokeInfo();
 }
 
-console.log(loadedPokemon);
-
 
 function setBackgroundColor(typeName) {
     switch (typeName) {
@@ -78,7 +76,8 @@ function showContainer(pokemonId) {
 
     document.getElementById('pokemon').classList.add('d-none');
 
-    currentPokemonIndex = selectedPokemon;
+    currentPokemonIndex = loadedPokemon.indexOf(selectedPokemon);
+
 
     renderChart(pokemonId);
     shownoButton();
@@ -94,18 +93,24 @@ function closebtn() {
 }
 
 function showNextPokemon() {
+    console.log("Vorheriger Index:", currentPokemonIndex);
     if (currentPokemonIndex < loadedPokemon.length - 1) {
         currentPokemonIndex++;
+        console.log("Aktueller Index:", currentPokemonIndex);
         showContainer(loadedPokemon[currentPokemonIndex].id);
     }
 }
 
 function showPreviousPokemon() {
+    console.log("Vorheriger Index:", currentPokemonIndex);
     if (currentPokemonIndex > 0) {
         currentPokemonIndex--;
+        console.log("Aktueller Index:", currentPokemonIndex);
         showContainer(loadedPokemon[currentPokemonIndex].id);
     }
 }
+
+
 
 function addLoad() {
     currentPokemonIndex += loadStop; 
